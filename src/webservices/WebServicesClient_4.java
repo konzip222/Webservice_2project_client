@@ -1,15 +1,23 @@
 package webservices;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -19,13 +27,17 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
+import javax.xml.ws.soap.MTOMFeature;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDJpeg;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 import org.jg.rsi.HelloWorld;
 import org.jg.rsi.Events;
+import org.jg.rsi.HelloWorldImplService;
 
 /**
  *
@@ -52,9 +64,17 @@ public class WebServicesClient_4 extends JFrame {
         // connectiong with Webservice
         URL url = new URL("http://kuba_dom:8080/WebApplicationProject2/HelloWorldImplService?wsdl");
         QName qname = new QName("http://rsi.jg.org/", "HelloWorldImplService");
-        Service service = Service.create(url, qname);
-        HelloWorld webservice = service.getPort(HelloWorld.class);
-        // crating GUI
+     //   Service service = Service.create(url, qname);
+     //   HelloWorld webservice = service.getPort(HelloWorld.class);
+        HelloWorldImplService service = new HelloWorldImplService();
+        HelloWorld webservice = service.getHelloWorldImplPort(new MTOMFeature());
+        byte[] image = webservice.getImageByName("event.jpg");
+        /*JFrame frame = new JFrame();
+        frame.setSize(300, 300);
+        JLabel label = new JLabel(new ImageIcon(image));
+        frame.add(label);
+        frame.setVisible(true);*/
+        // creating GUI
         this.initComponents();
         // initialization of text input listeners
         this.initTextInputListeners();
@@ -162,7 +182,11 @@ public class WebServicesClient_4 extends JFrame {
                     PDDocument doc = new PDDocument();
                     PDPage page = new PDPage();
                     doc.addPage( page );
-                    PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+                    // Creating Image
+                    BufferedImage img = ImageIO.read(new ByteArrayInputStream(image));
+                    BufferedImage imgResized = resize(img,55,55);
+                    PDXObjectImage image2 = new PDJpeg(doc,imgResized);
+                    PDPageContentStream contentStream = new PDPageContentStream(doc, page, true, true);
                     // Adding page title
                     contentStream.beginText();
                     contentStream.setFont(PDType1Font.HELVETICA, 26);
@@ -189,6 +213,8 @@ public class WebServicesClient_4 extends JFrame {
                     }
                     // drawing table
                     drawTable(page, contentStream, 700, 100, content);
+                    // adding image
+                    contentStream.drawImage(image2, 540, 730);
                     contentStream.close();
                     // adding doument name
                     doc.save("test.pdf" );
@@ -833,5 +859,14 @@ public class WebServicesClient_4 extends JFrame {
             texty-=rowHeight;
             textx = margin+cellMargin;
         }
-    }    
+    }
+    // Method for resiezing BufferedImage
+    public static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
+    }
 }

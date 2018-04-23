@@ -30,8 +30,10 @@ public class ObjectFactory {
     private final static QName _GetEventsOfWeekResponse_QNAME = new QName("http://rsi.jg.org/", "getEventsOfWeekResponse");
     private final static QName _GetEventsOfDay_QNAME = new QName("http://rsi.jg.org/", "getEventsOfDay");
     private final static QName _AddEvent_QNAME = new QName("http://rsi.jg.org/", "addEvent");
+    private final static QName _GetImageByNameResponse_QNAME = new QName("http://rsi.jg.org/", "getImageByNameResponse");
     private final static QName _AddEventResponse_QNAME = new QName("http://rsi.jg.org/", "addEventResponse");
     private final static QName _GetEventsOfWeek_QNAME = new QName("http://rsi.jg.org/", "getEventsOfWeek");
+    private final static QName _GetImageByName_QNAME = new QName("http://rsi.jg.org/", "getImageByName");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jg.rsi
@@ -46,6 +48,14 @@ public class ObjectFactory {
      */
     public AddEvent createAddEvent() {
         return new AddEvent();
+    }
+
+    /**
+     * Create an instance of {@link GetImageByNameResponse }
+     * 
+     */
+    public GetImageByNameResponse createGetImageByNameResponse() {
+        return new GetImageByNameResponse();
     }
 
     /**
@@ -70,6 +80,14 @@ public class ObjectFactory {
      */
     public GetEventsOfWeek createGetEventsOfWeek() {
         return new GetEventsOfWeek();
+    }
+
+    /**
+     * Create an instance of {@link GetImageByName }
+     * 
+     */
+    public GetImageByName createGetImageByName() {
+        return new GetImageByName();
     }
 
     /**
@@ -167,6 +185,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetImageByNameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://rsi.jg.org/", name = "getImageByNameResponse")
+    public JAXBElement<GetImageByNameResponse> createGetImageByNameResponse(GetImageByNameResponse value) {
+        return new JAXBElement<GetImageByNameResponse>(_GetImageByNameResponse_QNAME, GetImageByNameResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AddEventResponse }{@code >}}
      * 
      */
@@ -182,6 +209,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://rsi.jg.org/", name = "getEventsOfWeek")
     public JAXBElement<GetEventsOfWeek> createGetEventsOfWeek(GetEventsOfWeek value) {
         return new JAXBElement<GetEventsOfWeek>(_GetEventsOfWeek_QNAME, GetEventsOfWeek.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetImageByName }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://rsi.jg.org/", name = "getImageByName")
+    public JAXBElement<GetImageByName> createGetImageByName(GetImageByName value) {
+        return new JAXBElement<GetImageByName>(_GetImageByName_QNAME, GetImageByName.class, null, value);
     }
 
 }

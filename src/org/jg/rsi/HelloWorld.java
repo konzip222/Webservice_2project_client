@@ -48,24 +48,6 @@ public interface HelloWorld {
 
     /**
      * 
-     * @param week
-     * @param year
-     * @return
-     *     returns java.util.List<org.jg.rsi.Events>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getEventsOfWeek", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeek")
-    @ResponseWrapper(localName = "getEventsOfWeekResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeekResponse")
-    @Action(input = "http://rsi.jg.org/HelloWorld/getEventsOfWeekRequest", output = "http://rsi.jg.org/HelloWorld/getEventsOfWeekResponse")
-    public List<Events> getEventsOfWeek(
-        @WebParam(name = "week", targetNamespace = "")
-        int week,
-        @WebParam(name = "year", targetNamespace = "")
-        int year);
-
-    /**
-     * 
      * @param month
      * @param year
      * @param name
@@ -96,6 +78,24 @@ public interface HelloWorld {
 
     /**
      * 
+     * @param week
+     * @param year
+     * @return
+     *     returns java.util.List<org.jg.rsi.Events>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getEventsOfWeek", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeek")
+    @ResponseWrapper(localName = "getEventsOfWeekResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeekResponse")
+    @Action(input = "http://rsi.jg.org/HelloWorld/getEventsOfWeekRequest", output = "http://rsi.jg.org/HelloWorld/getEventsOfWeekResponse")
+    public List<Events> getEventsOfWeek(
+        @WebParam(name = "week", targetNamespace = "")
+        int week,
+        @WebParam(name = "year", targetNamespace = "")
+        int year);
+
+    /**
+     * 
      * @param month
      * @param year
      * @param name
@@ -120,5 +120,20 @@ public interface HelloWorld {
         int year,
         @WebParam(name = "description", targetNamespace = "")
         String description);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getImageByName", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetImageByName")
+    @ResponseWrapper(localName = "getImageByNameResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetImageByNameResponse")
+    @Action(input = "http://rsi.jg.org/HelloWorld/getImageByNameRequest", output = "http://rsi.jg.org/HelloWorld/getImageByNameResponse")
+    public byte[] getImageByName(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
 
 }
