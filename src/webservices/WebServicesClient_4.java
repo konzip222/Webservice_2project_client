@@ -64,16 +64,8 @@ public class WebServicesClient_4 extends JFrame {
         // connectiong with Webservice
         URL url = new URL("http://kuba_dom:8080/WebApplicationProject2/HelloWorldImplService?wsdl");
         QName qname = new QName("http://rsi.jg.org/", "HelloWorldImplService");
-     //   Service service = Service.create(url, qname);
-     //   HelloWorld webservice = service.getPort(HelloWorld.class);
         HelloWorldImplService service = new HelloWorldImplService();
         HelloWorld webservice = service.getHelloWorldImplPort(new MTOMFeature());
-        byte[] image = webservice.getImageByName("event.jpg");
-        /*JFrame frame = new JFrame();
-        frame.setSize(300, 300);
-        JLabel label = new JLabel(new ImageIcon(image));
-        frame.add(label);
-        frame.setVisible(true);*/
         // creating GUI
         this.initComponents();
         // initialization of text input listeners
@@ -183,6 +175,7 @@ public class WebServicesClient_4 extends JFrame {
                     PDPage page = new PDPage();
                     doc.addPage( page );
                     // Creating Image
+                    byte[] image = webservice.getImageByName("event.jpg");
                     BufferedImage img = ImageIO.read(new ByteArrayInputStream(image));
                     BufferedImage imgResized = resize(img,55,55);
                     PDXObjectImage image2 = new PDJpeg(doc,imgResized);
