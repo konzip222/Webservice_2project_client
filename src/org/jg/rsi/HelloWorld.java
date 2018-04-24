@@ -29,27 +29,6 @@ public interface HelloWorld {
      * 
      * @param month
      * @param year
-     * @param day
-     * @return
-     *     returns java.util.List<org.jg.rsi.Events>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getEventsOfDay", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfDay")
-    @ResponseWrapper(localName = "getEventsOfDayResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfDayResponse")
-    @Action(input = "http://rsi.jg.org/HelloWorld/getEventsOfDayRequest", output = "http://rsi.jg.org/HelloWorld/getEventsOfDayResponse")
-    public List<Events> getEventsOfDay(
-        @WebParam(name = "day", targetNamespace = "")
-        int day,
-        @WebParam(name = "month", targetNamespace = "")
-        int month,
-        @WebParam(name = "year", targetNamespace = "")
-        int year);
-
-    /**
-     * 
-     * @param month
-     * @param year
      * @param name
      * @param description
      * @param id
@@ -75,24 +54,6 @@ public interface HelloWorld {
         int year,
         @WebParam(name = "description", targetNamespace = "")
         String description);
-
-    /**
-     * 
-     * @param week
-     * @param year
-     * @return
-     *     returns java.util.List<org.jg.rsi.Events>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getEventsOfWeek", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeek")
-    @ResponseWrapper(localName = "getEventsOfWeekResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeekResponse")
-    @Action(input = "http://rsi.jg.org/HelloWorld/getEventsOfWeekRequest", output = "http://rsi.jg.org/HelloWorld/getEventsOfWeekResponse")
-    public List<Events> getEventsOfWeek(
-        @WebParam(name = "week", targetNamespace = "")
-        int week,
-        @WebParam(name = "year", targetNamespace = "")
-        int year);
 
     /**
      * 
@@ -135,5 +96,44 @@ public interface HelloWorld {
     public byte[] getImageByName(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
+
+    /**
+     * 
+     * @param week
+     * @param year
+     * @return
+     *     returns java.util.List<org.jg.rsi.Events>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getEventsOfWeek", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeek")
+    @ResponseWrapper(localName = "getEventsOfWeekResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfWeekResponse")
+    @Action(input = "http://rsi.jg.org/HelloWorld/getEventsOfWeekRequest", output = "http://rsi.jg.org/HelloWorld/getEventsOfWeekResponse")
+    public List<Events> getEventsOfWeek(
+        @WebParam(name = "week", targetNamespace = "")
+        int week,
+        @WebParam(name = "year", targetNamespace = "")
+        int year);
+
+    /**
+     * 
+     * @param month
+     * @param year
+     * @param day
+     * @return
+     *     returns java.util.List<org.jg.rsi.Events>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getEventsOfDay", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfDay")
+    @ResponseWrapper(localName = "getEventsOfDayResponse", targetNamespace = "http://rsi.jg.org/", className = "org.jg.rsi.GetEventsOfDayResponse")
+    @Action(input = "http://rsi.jg.org/HelloWorld/getEventsOfDayRequest", output = "http://rsi.jg.org/HelloWorld/getEventsOfDayResponse")
+    public List<Events> getEventsOfDay(
+        @WebParam(name = "day", targetNamespace = "")
+        int day,
+        @WebParam(name = "month", targetNamespace = "")
+        int month,
+        @WebParam(name = "year", targetNamespace = "")
+        int year);
 
 }
